@@ -161,8 +161,9 @@ urlpatterns = [
 RestAPI 簡單就完成了
 
 
+<img scr = "https://github.com/Eddie02582/Django-REST-framework/blob/main/Quick%20Start/viewset-1.png">
 
-
+<img scr = "https://github.com/Eddie02582/Django-REST-framework/blob/main/Quick%20Start/viewset-2.png">
 
 
 
