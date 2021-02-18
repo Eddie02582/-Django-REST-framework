@@ -1,6 +1,6 @@
 # Relationships
  
-```
+```python
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
@@ -100,24 +100,12 @@ HyperlinkedRelatedField,所以posts 輸出會是連結
 
 ## Nested
 ```python
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = ['id', 'message', 'topic']
-        #fields = ['id', 'message', 'topic']
-
-
-class TopicSerializer(serializers.ModelSerializer):    
     posts = PostSerializer(many=True, read_only=True)   
-
-    class Meta:
-        model = Topic
-        fields = ['id', 'subject', 'last_updated', 'starter', 'views','posts']
 ```
 
-
+使用PostSerializer會將原本的欄位疊代進來
 data 格式如下
-```
+```python
 [
     {
         "id": 1,
@@ -139,7 +127,7 @@ data 格式如下
         "views": 0
     },
 ]
-
+```
 
 
 
