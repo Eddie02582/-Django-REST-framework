@@ -1,11 +1,103 @@
-# Relationships
+# Custom Field
+這邊講如何自訂Field,主要分成有沒有關連性需分
+
+
  
 ```python
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id', 'message', 'topic']
-        #fields = ['id', 'message', 'topic']
+        fields = ['id', 'message', 'topic']        
+
+    def __str__(self):
+        return self.message
+        
+class TopicSerializer(serializers.ModelSerializer):   
+    class Meta:
+        model = Topic
+        fields = ['id', 'subject', 'last_updated', 'starter', 'views','posts']
+```
+
+
+## Commom
+
+### SerializerMethodField
+
+
+
+```python 
+class TopicSerializer(serializers.ModelSerializer):     
+    days_since_create = serializers.SerializerMethodField()
+    class Meta:
+        model = Topic
+        fields = ['id', 'subject', 'last_updated', 'starter', 'views','posts','days_since_create']
+    def get_days_since_create(self, obj):
+        return (now() - obj.last_updated).days
+```
+
+使用SerializerMethodField可以自訂Serializer的欄位
+
+```
+{
+    "id": 1,
+    "subject": "test_new",
+    "last_updated": "2021-02-17T08:12:20.154735Z",
+    "starter": 1,
+    "views": 0,
+    "posts": [
+        1,
+        2
+    ],
+    "days_since_create": 0
+}
+```
+
+### Using Extra class
+
+有時候會需要自定義序列化，舉個例子，這邊不希望又多一個 property 回傳，所以這時候我們就必須自定義序列化，也就是
+
+
+```
+class ToCapitalizeCaseCharField(serializers.CharField):
+    def to_representation(self, value):
+        return value.capitalize()
+
+class TopicSerializer(serializers.ModelSerializer):       
+    days_since_create = serializers.SerializerMethodField()
+    subject = ToUpperCaseCharField()
+    class Meta:
+        model = Topic
+        fields = ['id', 'subject', 'last_updated', 'starter', 'views','posts','days_since_create']
+
+    def get_days_since_create(self, obj):
+        return (now() - obj.last_updated).days
+```
+
+與SerializerMethodField方法不同,並沒有新增Field
+```
+{
+    "id": 1,
+    "subject": "Test_new",
+    "last_updated": "2021-02-17T08:12:20.154735Z",
+    "starter": 1,
+    "views": 0,
+    "posts": [
+        1,
+        2
+    ],
+    "days_since_create": 0
+}
+```
+
+
+
+## Relationships
+ 
+```python
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'message', 'topic']        
 
     def __str__(self):
         return self.message
@@ -18,7 +110,7 @@ class TopicSerializer(serializers.ModelSerializer):
 
 
 
-## StringRelatedField
+### StringRelatedField
 修改TopicSerializer,自訂posts輸出格式
 
 ```python
@@ -55,7 +147,7 @@ http http://127.0.0.1:80/topic/1
 ```
 
 
-## PrimaryKeyRelatedField
+### PrimaryKeyRelatedField
 
 ```python
 posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
@@ -77,7 +169,7 @@ posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 }
 ```
 
-## HyperlinkedRelatedField
+### HyperlinkedRelatedField
 ```python
 posts = serializers.HyperlinkedRelatedField(many=True, read_only=True,view_name='post-detail')    
 ```    
@@ -98,7 +190,7 @@ HyperlinkedRelatedField,所以posts 輸出會是連結
 }
 ```  
 
-## Nested
+### Nested
 ```python
     posts = PostSerializer(many=True, read_only=True)   
 ```
@@ -129,9 +221,6 @@ data 格式如下
 ]
 ```
 
-## Custom Field
-
-### SerializerMethodField
 
 
 
