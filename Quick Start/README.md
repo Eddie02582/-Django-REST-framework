@@ -16,7 +16,7 @@
 
 在drf/drf/settings.py 的INSTALLED_APPS 新增rest_framework
 
-```
+```python
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 
 在drf/drf/settings.py 的INSTALLED_APPS 新增rest_framework
 
-```
+```python
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 
 
 在discussion/models 新增以下
-```
+```python
 from django.contrib.auth.models import User
 class Topic(models.Model):
     subject = models.CharField(max_length=255)
@@ -91,7 +91,7 @@ class Post(models.Model):
     
 #### Use serializers.ModelSerializer    
 discussion/serializers.py
-```
+```python
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -114,7 +114,7 @@ class PostSerializer(serializers.ModelSerializer):
 ### 建立 API views  
 沒有特別需求直接使用ModelViewSet,其他方法在別篇詳細說明
 ModelViewSet    
-```
+```python
 from rest_framework import viewsets
 
 from .models import Post, Topic
@@ -143,7 +143,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 ```        
 discussion/urls.py    
-```
+```python
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
