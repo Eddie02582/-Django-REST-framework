@@ -1,0 +1,50 @@
+<div id="user-modal-create" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="user-modal-title">Create</h5>
+          <button class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" method="post" data-url="/extend/api/user/">
+          {% csrf_token %}
+        <div class="modal-body">
+            <div name = "user-section">
+              <label for="username"> Username</label>
+              <input type="text" name="username" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div name = "first_name-section">
+              <label for="first_name"> First Name</label>
+              <input type="text" name="first_name" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div name = "last_name-section">
+              <label for="last_name"> Last Name</label>
+              <input type="text" name="last_name" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div id = "profile-password-section">
+              <label for="password">Password</label>
+              <input type="password" name = "password" name="password" class="form-control" required>                           
+            </div> 
+
+            <div name = "email-section">
+              <label for="email">Email</label>
+              <input type="email" name="email" maxlength="30" autofocus="" class="form-control" required>
+            </div>                        
+            <div name = "profile-cell_phone_number-section">
+              <label for="profile.cell_phone_number">Cell Phone Number</label>
+              <input type="text" name="profile.cell_phone_number" maxlength="30" autofocus="" class="form-control" required>
+            </div>  
+            <div name = "profile-points-section">
+              <label for="profile.points">Points</label>
+              <input type="number" name="profile.points" value=0 class="form-control" required>                           
+            </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,33 @@
+<div id="topic-modal-create" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="user-modal-title">Create Topic</h5>
+          <button class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form  method="post" data-url="/boards/api/topic/" class = "js-create-topic">
+          {% csrf_token %}
+        <div class="modal-body">
+            <div name = "user-section">
+              <label for="subject"> Subject</label>
+              <input type="text" name="subject" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div name = "first_name-section">
+              <label for="first_name"> Description</label>
+              <textarea name="description" class="form-control" cols="40" rows="10" placeholder="What is on your mind?" maxlength="4000" required id="id_message"></textarea>
+            </div>   
+            <!-- <select class="form-control" name="board">            
+              <option value="1">Python</option>        
+            </select> -->
+            
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

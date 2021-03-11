@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+
+    {% load static %}
+    {% block stylesheet %}       
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-table.css' %}"> 
+   
+    {% endblock %}  
+    {% block script %} 
+    <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+    <!-- <script src="{% static 'js/user.js' %}"></script> -->
+    <!-- <script src="{% static 'js/accouts.js' %}"></script> -->
+    
+    
+    {% endblock %}
+
+                {% block content %}  
+
+                {% include 'user/create.html' %}
+                {% include 'user/update.html' %}
+                <table id="board-table"></table>
+
+                <script>
+
+
+               
+    function initialBoardsTable (){
+      $('#board-table') .bootstrapTable({                        
+        url: "/boards/api/board/",
+        classes:'table',
+        showColumns : true,
+        showColumnsToggleAll:true, //在欄位選擇開啟開關全部欄位
+        showToggle : true, //名片式/table式切換
+        showPaginationSwitch : true, //分頁/不分頁切換
+        showRefresh : true, //重新整理
+        showFullscreen: true,
+        search : true, //查詢 
+        pagination : true, 
+        pageSize : 15,    
+        height:500,
+        buttons :"buttons",
+        toolbar :"#toolbar",
+        uniqueId :"id",
+        columns: [ 
+              { 
+                field :"name",
+                title:'Board',
+                formatter:nameFormatter,                             
+              },
+              { 
+                field :"get_posts_count", 
+                title:'Posts',                                                    
+              },      
+              { 
+                field :"get_topics_count", 
+                title:'	Topics',                                                    
+              },      
+              { 
+                field :"get_last_post", 
+                title:'Last Post',                                                    
+              },  
+                    
+          ],
+
+        })                      
+
+    }
+
+    function nameFormatter(value, row, index){
+      var html = []
+      html.push('<a href="'+ row.topics +  '">' + value + "</a>")
+      html.push('<small class="text-muted d-block">' + row.description + "</small>")
+      return html.join('')
+    }
+
+
+
+    $(function() {
+        initialBoardsTable()  
+    })
+
+    </script>
+    {% endblock %}
+

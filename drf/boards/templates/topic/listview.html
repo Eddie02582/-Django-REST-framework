@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+    {% load static %}
+    {% block stylesheet %}       
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-table.css' %}"> 
+   
+    {% endblock %}  
+    {% block script %} 
+    <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+    
+  
+    
+    
+    {% endblock %}
+
+                {% block content %}
+                <h3>{{board}}</h3>  
+                <div id="toolbar" style="float:right">
+                  <button id="add" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Add
+                  </button>
+                </div>
+                {% include 'topic/create.html' %}
+                <table id="topics-table"></table>
+                <script src="{% static 'js/topic.js' %}"></script>
+    <script>
+     $(function() {
+       initial("{{board.name}}","{{board.id}}")  
+     })
+
+      
+    </script>
+    {% endblock %}
+

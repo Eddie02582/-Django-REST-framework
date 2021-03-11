@@ -1,0 +1,45 @@
+<div id="user-update-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="user-modal-title">Update</h5>
+          <button class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="PATCH" data-url="" enctype="">
+          {% csrf_token %}
+        <div class="modal-body">
+            <!-- <div name = "user-section">
+              <label for="username"> Username</label>
+              <input type="text" name="username" id = "username" maxlength="30" autofocus="" class="form-control" required>
+            </div> -->
+            <div name = "first_name-section">
+              <label for="first_name"> First Name</label>
+              <input type="text" name="first_name" id = "first_name" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div name = "last_name-section">
+              <label for="last_name"> Last Name</label>
+              <input type="text" name="last_name" id = "last_name" maxlength="30" autofocus="" class="form-control" required>
+            </div>
+            <div name = "email-section">
+              <label for="email">Email</label>
+              <input type="email" name="email" id = "email" maxlength="30" autofocus="" class="form-control" required>
+            </div>                        
+            <div name = "profile-cell_phone_number-section">
+              <label for="profile.cell_phone_number">Cell Phone Number</label>
+              <input type="text" name="profile.cell_phone_number" id = "cell_phone_number" maxlength="30" autofocus="" class="form-control" required>
+            </div>  
+            <div name = "profile-points-section">
+              <label for="profile.points">Points</label>
+              <input type="number" name="profile.points" id = "points" class="form-control" required>                           
+            </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

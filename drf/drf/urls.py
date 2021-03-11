@@ -13,11 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
+from django.views.generic import RedirectView
+
+from .views import home_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('discussion.urls')),
-    
+    path('boards/', include('boards.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('', home_page ,name = "home_page"),
+    #path('auth/', include('djoser.urls')),	
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
