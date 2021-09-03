@@ -5,7 +5,7 @@
 
 <a href = "https://www.django-rest-framework.org/api-guide/serializers/#serializing-objects">詳細參考官方說明</a>
 建立一個object
-```
+```python 
 from datetime import datetime
 
 class Comment:
@@ -18,7 +18,7 @@ comment = Comment(email='leila@example.com', content='foo bar')
 ```
 建立一個serializer
 
-```
+```python 
 from rest_framework import serializers
 
 class CommentSerializer(serializers.Serializer):
@@ -28,15 +28,14 @@ class CommentSerializer(serializers.Serializer):
 ```
 
 We can now use CommentSerializer to serialize a comment, or list of comments. Again, using the Serializer class looks a lot like using a Form class.
-```
-
+```python 
 serializer = CommentSerializer(comment)
 serializer.data
 ```
 
 如果剛好是django 模型,就可以使用下列方法
 
-```
+```python 
 class TopicSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     subject = serializers.CharField(required=False, allow_blank=True, max_length=100)
@@ -68,7 +67,7 @@ serializer.save(owner=request.user)
 
 自訂validate field
 
-```
+```python 
 class TopicSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     subject = serializers.CharField(required=False, allow_blank=True, max_length=100)
@@ -84,7 +83,7 @@ class TopicSerializer(serializers.Serializer):
 ```
 自訂validate
 
-```
+```python 
     def validate(self, data):
         """
         Check subject is capitalize.
@@ -103,7 +102,7 @@ ModelSerializer與Serializer類相同，除了：
     <li>自動實現create()和update()</li>
 </ul>
 
-```
+```python 
 class TopicSerializer(serializers.ModelSerializer):  
     days_since_create = serializers.SerializerMethodField()
     subject = ToCapitalizeCaseCharField()

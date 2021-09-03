@@ -37,7 +37,7 @@ class TopicSerializer(serializers.ModelSerializer):
 
 使用SerializerMethodField可以自訂Serializer的欄位
 
-```
+```python 
 {
     "id": 1,
     "subject": "test_new",
@@ -57,7 +57,7 @@ class TopicSerializer(serializers.ModelSerializer):
 有時候會需要自定義序列化，舉個例子，這邊不希望又多一個 property 回傳，所以這時候我們就必須自定義序列化，也就是
 
 
-```
+```python 
 class ToCapitalizeCaseCharField(serializers.CharField):
     def to_representation(self, value):
         return value.capitalize()
